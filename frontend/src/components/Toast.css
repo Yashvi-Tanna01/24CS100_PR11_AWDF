@@ -1,0 +1,44 @@
+.toast-container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 1000;
+  padding: 0.85rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  box-shadow: var(--shadow-lg);
+  animation: slideInToast 0.25s ease-out;
+}
+
+.toast-success {
+  background: #065f46;
+  color: white;
+}
+
+.toast-error {
+  background: #991b1b;
+  color: white;
+}
+
+.toast-container button {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1.15rem;
+  cursor: pointer;
+}
+
+@keyframes slideInToast {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

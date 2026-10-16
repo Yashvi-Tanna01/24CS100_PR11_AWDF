@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  # ==========================================
+  # Database Service: MongoDB
+  # ==========================================
+  mongodb:
+    image: mongo:latest
+    container_name: task-mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: taskdb
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - app-network
+
+  # ==========================================
+  # Backend Service: Node.js & Express REST API
+  # ==========================================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: task-backend
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - MONGO_URI=mongodb://mongodb:27017/taskdb
+      - JWT_SECRET=maitri_jwt_secret_key_prac11_d25cs120
+    depends_on:
+      - mongodb
+    networks:
+      - app-network
+
+  # ==========================================
+  # Frontend Service: React (Vite Preview)
+  # ==========================================
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: task-frontend
+    restart: always
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_BACKEND_URL=http://backend:5000
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+# ==========================================
+# Named Volumes for Persistent Data
+# ==========================================
+volumes:
+  mongo-data:
+    name: mongo-data
+
+# ==========================================
+# Isolated Bridge Network
+# ==========================================
+networks:
+  app-network:
+    name: app-network
+    driver: bridge
