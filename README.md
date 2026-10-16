@@ -19,19 +19,6 @@ To containerize the full-stack application using Docker and orchestrate services
 
 ---
 
-## Prerequisites
-- Practicals 1–10 completed working full-stack Task Management application.
-- Docker Desktop (or Docker Engine) installed and verified on the lab machine.
-
----
-
-## Theory Concepts (Self-Study Reference)
-
-### Coursera Pointer
-Week 11 IBM: *Introduction to Containers with Docker, Kubernetes & OpenShift* (focusing specifically on Docker fundamentals and Docker Compose multi-container orchestration).
-
----
-
 ## Architecture & Service Topology Diagram
 
 ```text
